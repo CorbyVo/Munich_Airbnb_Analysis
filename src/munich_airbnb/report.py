@@ -1,0 +1,17 @@
+def print_key_findings(df, room_type_summary, neighbourhood_summary):
+    total_listings = len(df)
+    median_price = df["price"].median()
+    most_common_room_type = df["room_type"].value_counts().idxmax()
+    most_expensive_room_type = room_type_summary["median_price"].idxmax()
+    most_expensive_neighbourhood = neighbourhood_summary["median_price"].idxmax()
+
+    print("Munich Airbnb Analysis - Key Findings")
+    print("-------------------------------------")
+    print(f"Total cleaned listings: {total_listings:,}")
+    print(f"Median price per night: EUR {median_price:,.0f}")
+    print(f"Most common room type: {most_common_room_type}")
+    print(f"Room type with highest median price: {most_expensive_room_type}")
+    print(f"Neighbourhood with highest median price: {most_expensive_neighbourhood}")
+    print()
+    print("Result tables saved in: results/")
+    print("Charts saved in: images/")

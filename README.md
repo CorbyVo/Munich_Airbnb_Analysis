@@ -72,7 +72,16 @@ Munich_Airbnb_Analysis/
 │   └── summary tables
 │
 ├── scripts/
-│   └── analyze_airbnb.py
+│   └── run_analysis.py
+│
+├── src/
+│   └── munich_airbnb/
+│       ├── config.py
+│       ├── load_data.py
+│       ├── clean_data.py
+│       ├── analyze.py
+│       ├── visualize.py
+│       └── report.py
 │
 ├── README.md
 ├── requirements.txt
@@ -90,7 +99,7 @@ pip install -r requirements.txt
 Run the analysis:
 
 ```bash
-python scripts/analyze_airbnb.py
+python scripts/run_analysis.py
 ```
 
 The script creates:
@@ -110,8 +119,8 @@ The script creates:
 5. Remove listings with missing key fields.
 6. Filter unrealistic nightly prices above EUR 1,000.
 7. Create an availability level feature.
-8. Compare price patterns by room type and neighbourhood.
-9. Save result tables and charts.
+8. Create room-type and neighbourhood summary tables.
+9. Save charts and print key findings.
 
 ## Limitations
 
