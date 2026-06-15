@@ -51,6 +51,14 @@ or:
 data/raw/listings.csv.gz
 ```
 
+## Tech Stack
+
+- Python
+- pandas
+- matplotlib
+- seaborn
+- Git and GitHub
+  
 ## Skills Demonstrated
 
 - Data loading with pandas
@@ -117,7 +125,7 @@ The script creates:
 - `images/top_neighbourhoods_by_price.png`
 - `images/price_vs_availability.png`
 
-## Method
+## Project Workflow
 
 1. Load the Munich Airbnb listings dataset.
 2. Keep the columns needed for pricing and availability analysis.
