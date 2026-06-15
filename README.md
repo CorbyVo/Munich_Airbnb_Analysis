@@ -2,7 +2,6 @@
 
 Exploratory Data Analysis of Airbnb listings in Munich, Germany. The goal is to understand pricing patterns, room-type differences, neighbourhood trends, and listing availability.
 
-This project is designed as a Data Analyst portfolio project for working student, internship, and junior data roles.
 
 ## Business Questions
 
