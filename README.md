@@ -19,6 +19,20 @@ Exploratory Data Analysis of Airbnb listings in Munich, Germany. The goal is to 
 - `Entire home/apt` also has the highest median price among room types.
 - `Altstadt-Lehel` has the highest median price among neighbourhoods with enough listings.
 
+## Visualizations
+
+### Price by Room Type
+
+![Price by Room Type](images/price_by_room_type.png)
+
+### Top Neighbourhoods by Median Price
+
+![Top Neighbourhoods by Price](images/top_neighbourhoods_by_price.png)
+
+### Price vs Availability
+
+![Price vs Availability](images/price_vs_availability.png)
+
 ## Dataset
 
 Source: Inside Airbnb, Munich, Bavaria, Germany.
