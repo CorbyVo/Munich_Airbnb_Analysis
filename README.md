@@ -58,18 +58,6 @@ data/raw/listings.csv.gz
 - matplotlib
 - seaborn
 - Git and GitHub
-  
-## Skills Demonstrated
-
-- Data loading with pandas
-- Data cleaning
-- Missing value handling
-- Outlier filtering
-- Feature engineering
-- Grouping and aggregation
-- Exploratory Data Analysis
-- Data visualisation with seaborn and matplotlib
-- Business insight communication
 
 ## Project Structure
 
