@@ -12,6 +12,14 @@ This project is designed as a Data Analyst portfolio project for working student
 - Is there a visible relationship between price and yearly availability?
 - Which neighbourhoods may offer relatively good value for visitors?
 
+## Key Findings
+
+- The cleaned dataset contains 5,498 Airbnb listings in Munich.
+- The median nightly price is EUR 176.
+- The most common room type is `Entire home/apt`.
+- `Entire home/apt` also has the highest median price among room types.
+- `Altstadt-Lehel` has the highest median price among neighbourhoods with enough listings.
+
 ## Dataset
 
 Source: Inside Airbnb, Munich, Bavaria, Germany.
