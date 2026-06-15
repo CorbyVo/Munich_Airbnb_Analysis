@@ -4,5 +4,3 @@ __pycache__/
 
 data/raw/*.csv
 data/raw/*.csv.gz
-images/*.png
-results/*.csv
