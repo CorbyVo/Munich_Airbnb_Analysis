@@ -2,7 +2,11 @@
 
 Exploratory Data Analysis of Airbnb listings in Munich, Germany. The goal is to understand pricing patterns, room-type differences, neighbourhood trends, and listing availability.
 
+## Tableau Dashboard
 
+Interactive dashboard available on Tableau Public:
+
+[View the Tableau Dashboard](https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/Dashboard3?publish=yes&showOnboarding=true)
 ## Business Questions
 
 - Which room types are most common in Munich Airbnb listings?
@@ -150,5 +154,5 @@ The script creates:
 
 - Add calendar data to study seasonality and Oktoberfest pricing.
 - Add review data to analyze demand trends over time.
+- Improve the Tableau dashboard with more interactive filters and tooltips.
 - Build a simple price prediction model after the EDA.
-- Create a Streamlit dashboard for interactive exploration.
