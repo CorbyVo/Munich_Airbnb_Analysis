@@ -9,6 +9,7 @@ from munich_airbnb.analyze import (
     create_neighbourhood_summary,
     create_room_type_summary,
     save_summary_tables,
+    save_tableau_files,
 )
 from munich_airbnb.clean_data import clean_listings
 from munich_airbnb.load_data import load_listings
@@ -24,6 +25,7 @@ def main():
     neighbourhood_summary = create_neighbourhood_summary(clean_df)
 
     save_summary_tables(room_type_summary, neighbourhood_summary)
+    save_tableau_files(clean_df, room_type_summary, neighbourhood_summary)
     create_charts(clean_df, neighbourhood_summary)
     print_key_findings(clean_df, room_type_summary, neighbourhood_summary)
 
