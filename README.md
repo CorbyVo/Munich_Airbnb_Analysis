@@ -1,80 +1,163 @@
 # Munich Airbnb Market Analysis
 
-Exploratory Data Analysis of Airbnb listings in Munich, Germany. The goal is to understand pricing patterns, room-type differences, neighbourhood trends, and listing availability.
+This project analyzes Airbnb listings in Munich using Python, pandas, matplotlib, seaborn, Tableau, and GitHub.
+
+The project started as a general exploratory data analysis of Airbnb listings in Munich and was later extended with a **budget-vs-distance analysis** for visitors who may want to stay near Oktoberfest while also considering cheaper neighbourhoods outside the city center.
 
 ## Tableau Dashboard
 
 Interactive dashboard available on Tableau Public:
 
-[View the Tableau Dashboard](https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/Dashboard3?publish=yes&showOnboarding=true)
+[View the Tableau Dashboard](https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/Dashboard3)
+
+![Tableau Dashboard Screenshot](images/Screenshot.png)
+
 ## Business Questions
 
+This project answers the following questions:
+
 - Which room types are most common in Munich Airbnb listings?
-- How does price differ between entire apartments, private rooms, hotel rooms, and shared rooms?
+- How does nightly price differ between room types?
 - Which Munich neighbourhoods have the highest median nightly prices?
-- Is there a visible relationship between price and yearly availability?
-- Which neighbourhoods may offer relatively good value for visitors?
+- How does listing availability relate to price?
+- How does nightly price change by distance from the Oktoberfest area?
+- Which neighbourhoods may offer a better balance between price and distance?
+
+## Dataset
+
+The data comes from [Inside Airbnb](https://insideairbnb.com/get-the-data/), using the Munich, Bavaria, Germany dataset.
+
+Main raw files used locally:
+
+```text
+data/raw/listings.csv
+data/raw/calendar.csv.gz
+```
+
+The raw data files are not committed to GitHub because they are external dataset files. They are kept locally in the `data/raw/` folder.
+
+## Price Interpretation
+
+The `price` field used in this project is interpreted as the advertised daily/nightly listing price in EUR for Munich Airbnb listings.
+
+This price should be understood as an estimated price per night. It is not monthly rent, not a full-trip cost, and not the final Airbnb checkout price including service fees, cleaning fees, taxes, or discounts.
+
+The downloaded `calendar.csv.gz` file does not contain usable `price` or `adjusted_price` values. Therefore, this project does not claim to measure dynamic Oktoberfest-specific nightly prices.
+
+The budget-location analysis uses listing-level nightly prices from `listings.csv` and combines them with distance to Theresienwiese to support budget-oriented neighbourhood comparison.
+
+Important interpretation notes:
+
+- Price unit: EUR per night
+- Source of price data: `listings.csv`
+- Calendar price data: unavailable in the downloaded `calendar.csv.gz`
+- Not included: final booking costs, service fees, taxes, cleaning fees, discounts, or monthly rent
+- Budget-distance score: a simple analytical score, not an official Airbnb recommendation
 
 ## Key Findings
 
-- The cleaned dataset contains 5,498 Airbnb listings in Munich.
-- The median nightly price is EUR 176.
+From the cleaned listing dataset:
+
+- The cleaned dataset contains 5,498 Munich Airbnb listings.
+- The median nightly listing price is €176.
 - The most common room type is `Entire home/apt`.
-- `Entire home/apt` also has the highest median price among room types.
-- `Altstadt-Lehel` has the highest median price among neighbourhoods with enough listings.
+- `Entire home/apt` also has the highest median nightly price among room types.
+- `Altstadt-Lehel` has the highest median nightly price among analysed neighbourhoods.
+
+The budget-location analysis adds a visitor-focused perspective by comparing nightly price with distance to the Oktoberfest area. This helps identify neighbourhoods that may be cheaper while still being reasonably close to central Munich.
 
 ## Visualizations
+
+### Top Neighbourhoods by Median Nightly Price
+
+![Top Neighbourhoods by Median Nightly Price](images/top_neighbourhoods_by_price.png)
 
 ### Price by Room Type
 
 ![Price by Room Type](images/price_by_room_type.png)
 
-### Top Neighbourhoods by Median Price
-
-![Top Neighbourhoods by Price](images/top_neighbourhoods_by_price.png)
-
 ### Price vs Availability
 
 ![Price vs Availability](images/price_vs_availability.png)
 
-## Dataset
+### Median Nightly Price by Distance to Oktoberfest
 
-Source: Inside Airbnb, Munich, Bavaria, Germany.
+![Median Nightly Price by Distance to Oktoberfest](images/price_by_distance_band.png)
 
-Data date: 27 September 2025.
+### Budget-Friendly Neighbourhood Recommendations
 
-Recommended file:
+![Budget-Friendly Neighbourhood Recommendations](images/budget_neighbourhood_recommendations.png)
 
-- `listings.csv` - summary listing data, good for visualisations
+## Project Workflow
 
-Alternative file:
+The project follows a typical data analyst workflow:
 
-- `listings.csv.gz` - detailed listing data
+1. Load Airbnb listing data.
+2. Clean price, availability, room type, and neighbourhood fields.
+3. Remove missing or unrealistic values.
+4. Create summary tables by room type and neighbourhood.
+5. Generate visualizations for price and availability patterns.
+6. Export Tableau-ready CSV files.
+7. Build an interactive Tableau dashboard.
+8. Extend the project with budget-vs-distance analysis for Oktoberfest visitors.
 
-Inside Airbnb download page:
+## Budget vs Distance Analysis
+
+The extended analysis estimates how far each listing is from Theresienwiese, the Oktoberfest area, using listing latitude and longitude.
+
+The analysis creates:
+
+- Distance from each listing to Oktoberfest in kilometers
+- Distance bands such as `0-2 km`, `2-5 km`, `5-10 km`, and `10+ km`
+- Median nightly price by distance band
+- Neighbourhood-level budget recommendations
+- A simple budget-distance score
+
+The budget-distance score is calculated as:
 
 ```text
-https://insideairbnb.com/get-the-data/
+budget_distance_score = median_price_eur_per_night + median_distance_km * 10
 ```
 
-Expected local path:
+A lower score means the neighbourhood has a better balance between lower nightly price and reasonable distance from Oktoberfest.
+
+## Generated Result Files
+
+Main result files:
 
 ```text
-data/raw/listings.csv
+results/room_type_summary.csv
+results/neighbourhood_summary.csv
+results/tableau_kpis.csv
+results/tableau_listings.csv
+results/price_by_distance_band.csv
+results/budget_neighbourhood_recommendations.csv
+results/tableau_budget_location_listings.csv
+results/budget_location_output_dictionary.csv
 ```
 
-or:
+Important output files for Tableau:
 
 ```text
-data/raw/listings.csv.gz
+results/tableau_listings.csv
+results/tableau_kpis.csv
+results/tableau_budget_location_listings.csv
+```
+
+The file below explains important generated columns:
+
+```text
+results/budget_location_output_dictionary.csv
 ```
 
 ## Tech Stack
 
 - Python
 - pandas
+- NumPy
 - matplotlib
 - seaborn
+- Tableau Public
 - Git and GitHub
 
 ## Project Structure
@@ -83,76 +166,103 @@ data/raw/listings.csv.gz
 Munich_Airbnb_Analysis/
 │
 ├── data/
+│   ├── README.md
 │   └── raw/
-│       └── listings.csv
+│       ├── listings.csv
+│       └── calendar.csv.gz
 │
 ├── images/
-│   └── generated charts
+│   ├── Screenshot.png
+│   ├── top_neighbourhoods_by_price.png
+│   ├── price_by_room_type.png
+│   ├── price_vs_availability.png
+│   ├── price_by_distance_band.png
+│   └── budget_neighbourhood_recommendations.png
 │
 ├── results/
-│   └── summary tables
+│   ├── room_type_summary.csv
+│   ├── neighbourhood_summary.csv
+│   ├── tableau_kpis.csv
+│   ├── tableau_listings.csv
+│   ├── price_by_distance_band.csv
+│   ├── budget_neighbourhood_recommendations.csv
+│   ├── tableau_budget_location_listings.csv
+│   └── budget_location_output_dictionary.csv
 │
 ├── scripts/
-│   └── run_analysis.py
+│   ├── run_analysis.py
+│   └── run_budget_location_analysis.py
 │
 ├── src/
 │   └── munich_airbnb/
+│       ├── __init__.py
 │       ├── config.py
 │       ├── load_data.py
 │       ├── clean_data.py
 │       ├── analyze.py
 │       ├── visualize.py
-│       └── report.py
+│       ├── report.py
+│       └── budget_location_analysis.py
 │
+├── Munich Airbnb Market Analysis Dashboard.twb
+├── Munich Airbnb Market Analysis Dashboard.twbx
 ├── README.md
 ├── requirements.txt
 └── .gitignore
 ```
 
-## How To Run
+Note: `.venv/`, raw data files, and Tableau-generated support folders should not be committed to GitHub.
 
-Install the required libraries:
+## How to Run the Project
+
+Install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the analysis:
+Run the main Airbnb listing analysis:
 
 ```bash
-python scripts/run_analysis.py
+py scripts/run_analysis.py
 ```
 
-The script creates:
+Run the budget-vs-distance analysis:
 
-- `results/room_type_summary.csv`
-- `results/neighbourhood_summary.csv`
-- `images/price_by_room_type.png`
-- `images/top_neighbourhoods_by_price.png`
-- `images/price_vs_availability.png`
+```bash
+py scripts/run_budget_location_analysis.py
+```
 
-## Project Workflow
+The scripts generate updated CSV files in:
 
-1. Load the Munich Airbnb listings dataset.
-2. Keep the columns needed for pricing and availability analysis.
-3. Clean the price column.
-4. Fill missing review frequency values with zero.
-5. Remove listings with missing key fields.
-6. Filter unrealistic nightly prices above EUR 1,000.
-7. Create an availability level feature.
-8. Create room-type and neighbourhood summary tables.
-9. Save charts and print key findings.
+```text
+results/
+```
+
+and updated charts in:
+
+```text
+images/
+```
 
 ## Limitations
 
-- Prices are listing prices, not final transaction prices.
-- Availability does not directly equal occupancy.
-- Reviews are only an indirect signal of demand.
-- The dataset represents a market snapshot for one collection date.
+This project uses publicly available Airbnb listing data and should be interpreted as exploratory analysis, not as a complete booking-price engine.
 
-## Next Steps
+Important limitations:
 
-- Add calendar data to study seasonality and Oktoberfest pricing.
+- Prices are listing-level advertised nightly prices from `listings.csv`.
+- Calendar price and adjusted price values are unavailable in the downloaded `calendar.csv.gz`.
+- Final booking costs such as service fees, cleaning fees, taxes, and discounts are not included.
+- Distance to Oktoberfest is calculated using straight-line geographic distance, not actual public transport time.
+- The budget-distance score is a simple custom analytical score and should not be interpreted as an official recommendation system.
+
+## Future Improvements
+
+Possible next steps:
+
+- Add public transport travel time from each neighbourhood to Theresienwiese.
+- Improve the Tableau dashboard with more filters and custom tooltips.
 - Add review data to analyze demand trends over time.
-- Improve the Tableau dashboard with more interactive filters and tooltips.
-- Build a simple price prediction model after the EDA.
+- Add a simple price prediction model after the exploratory analysis.
+- Build a Streamlit version for interactive budget-based neighbourhood search.

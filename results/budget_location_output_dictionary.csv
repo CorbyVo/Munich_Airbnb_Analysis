@@ -1,0 +1,8 @@
+file_name,column_name,definition
+tableau_budget_location_listings.csv,price_eur_per_night,Advertised daily/nightly Airbnb listing price in EUR from listings.csv.
+price_by_distance_band.csv,median_price_eur_per_night,Median advertised nightly price in EUR for listings in each distance band.
+price_by_distance_band.csv,average_price_eur_per_night,Average advertised nightly price in EUR for listings in each distance band.
+budget_neighbourhood_recommendations.csv,median_price_eur_per_night,Median advertised nightly price in EUR for listings in each neighbourhood.
+budget_neighbourhood_recommendations.csv,median_distance_km,Median distance in kilometers from the neighbourhood's listings to Theresienwiese.
+budget_neighbourhood_recommendations.csv,budget_distance_score,Simple ranking score: median nightly price in EUR plus 10 times median distance in km. Lower is better.
+all budget-location outputs,price_unit,EUR per night. Prices are not monthly rent and not full-trip costs.

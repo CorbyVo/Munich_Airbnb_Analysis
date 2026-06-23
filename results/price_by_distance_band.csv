@@ -1,0 +1,5 @@
+distance_band,listings_count,median_price_eur_per_night,average_price_eur_per_night,median_distance_km,price_unit
+0-2 km from Oktoberfest,1133,257.0,313.59664607237426,1.1880052359800743,EUR per night
+2-5 km from Oktoberfest,2490,181.0,228.93895582329318,3.2406970825808235,EUR per night
+5-10 km from Oktoberfest,1638,135.0,180.20818070818072,6.521394839716992,EUR per night
+10+ km from Oktoberfest,237,139.0,162.47679324894514,10.483228138745725,EUR per night

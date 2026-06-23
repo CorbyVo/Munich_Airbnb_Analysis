@@ -5,3 +5,7 @@ __pycache__/
 
 data/raw/*.csv
 data/raw/*.csv.gz
+# Tableau local workbook files
+*.twb
+*.twbx
+*.twb Files/
