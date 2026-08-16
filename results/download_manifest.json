@@ -1,0 +1,23 @@
+{
+    "source_page": "https://insideairbnb.com/get-the-data/",
+    "downloaded_at": "2026-08-16T17:39:32",
+    "city": "Munich",
+    "files": [
+        {
+            "target_name": "summary_listings",
+            "snapshot_date": "2026-06-29",
+            "source_url": "https://data.insideairbnb.com/germany/bv/munich/2026-06-29/visualisations/listings.csv",
+            "local_path": "D:\\PycharmProjects\\Munich_Airbnb_Analysis\\data\\raw\\listings.csv",
+            "status": "downloaded",
+            "file_size_bytes": 1241771
+        },
+        {
+            "target_name": "calendar",
+            "snapshot_date": "2026-06-29",
+            "source_url": "https://data.insideairbnb.com/germany/bv/munich/2026-06-29/data/calendar.csv.gz",
+            "local_path": "D:\\PycharmProjects\\Munich_Airbnb_Analysis\\data\\raw\\calendar.csv.gz",
+            "status": "downloaded",
+            "file_size_bytes": 5914243
+        }
+    ]
+}
