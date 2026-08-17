@@ -9,3 +9,7 @@ data/raw/*.csv.gz
 *.twb
 *.twbx
 *.twb Files/
+
+# Local database outputs
+data/processed/*.sqlite
+data/processed/*.db
