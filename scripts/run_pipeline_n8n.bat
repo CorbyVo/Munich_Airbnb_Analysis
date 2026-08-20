@@ -11,9 +11,10 @@ if "%PIPELINE_MODE%"=="" (
 cd /d "%PROJECT_DIR%"
 
 echo Running Munich Airbnb pipeline...
+echo Project directory: %PROJECT_DIR%
 echo Mode: %PIPELINE_MODE%
 
-py scripts\run_pipeline.py %PIPELINE_MODE%
+py -u scripts\run_pipeline.py %PIPELINE_MODE%
 
 if errorlevel 1 (
     echo Pipeline failed.
@@ -21,4 +22,5 @@ if errorlevel 1 (
 )
 
 echo Pipeline finished successfully.
+
 endlocal

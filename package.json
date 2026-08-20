@@ -1,0 +1,24 @@
+{
+  "name": "munich_airbnb_analysis",
+  "version": "1.0.0",
+  "description": "This project analyzes Airbnb listings in Munich using Python, pandas, matplotlib, seaborn, Tableau, and an automated data pipeline.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CorbyVo/Munich_Airbnb_Analysis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CorbyVo/Munich_Airbnb_Analysis/issues"
+  },
+  "homepage": "https://github.com/CorbyVo/Munich_Airbnb_Analysis#readme",
+  "devDependencies": {
+    "n8n": "^2.35.5"
+  }
+}

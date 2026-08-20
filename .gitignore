@@ -13,3 +13,8 @@ data/raw/*.csv.gz
 # Local database outputs
 data/processed/*.sqlite
 data/processed/*.db
+
+# Node / n8n local setup
+node_modules/
+.n8n/
+n8n_data/

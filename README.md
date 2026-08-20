@@ -9,7 +9,7 @@ The goal is to understand nightly Airbnb prices, room-type differences, neighbou
 ## Latest Data Refresh
 
 - Latest dataset snapshot: `2026-06-29`
-- README generated at: `2026-08-20T21:24:08`
+- README generated at: `2026-08-21T00:28:27`
 - Total cleaned listings: `4,387`
 - Median nightly listing price: `€143`
 - Price unit: `EUR per night`
