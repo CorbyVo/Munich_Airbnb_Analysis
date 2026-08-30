@@ -1,0 +1,87 @@
+{
+  "name": "Munich Airbnb Pipeline Automation",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "4ca79d85-fc18-4ec6-8b02-d98f77b48f2e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "command": "cmd /c call \"D:\\PycharmProjects\\Munich_Airbnb_Analysis\\scripts\\run_pipeline_n8n.bat\" --force-download"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        336,
+        96
+      ],
+      "id": "806db99f-c2a4-41ed-a991-b28d00984a0d",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        240
+      ],
+      "id": "51bdf9ea-1639-4b64-a71f-231d16e17866",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "374821b4-fcb4-46d7-83ea-6576cd22176f",
+  "meta": {
+    "instanceId": "aa2eddb84c42fa37097fde76845591f18a041e81b31d07d6a97bf497f5238b09"
+  },
+  "nodeGroups": [],
+  "id": "gxiKb8tngmctpgwi",
+  "tags": []
+}
