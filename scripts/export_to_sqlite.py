@@ -16,7 +16,11 @@ def main() -> None:
         database_path=database_path,
     )
 
-    print(f"\nSQLite database created at: {database_path}")
+    print(f"\nSQLite database updated at: {database_path}")
+    print("Main tables:")
+    print("- cleaned_listings_latest")
+    print("- cleaned_listings_history")
+    print("- pipeline_runs")
 
 
 if __name__ == "__main__":

@@ -1,11 +1,11 @@
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 import subprocess
 import sys
 
+from munich_airbnb.database import save_csv_outputs_to_sqlite
 from munich_airbnb.download_data import download_latest_munich_data
 from munich_airbnb.readme_generator import generate_readme
-from munich_airbnb.database import save_csv_outputs_to_sqlite
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -13,18 +13,21 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 DATABASE_PATH = PROJECT_ROOT / "data" / "processed" / "munich_airbnb.sqlite"
 
 
-def run_command(command, step_name):
+def run_command(command: list[str], step_name: str) -> None:
     print("\n" + "=" * 60)
     print(f"Running step: {step_name}")
     print("=" * 60)
 
-    result = subprocess.run( command,cwd=PROJECT_ROOT,)
+    result = subprocess.run(
+        command,
+        cwd=PROJECT_ROOT,
+    )
 
     if result.returncode != 0:
         raise RuntimeError(f"Pipeline step failed: {step_name}")
 
 
-def run_pipeline(download_data=True, force_download=False):
+def run_pipeline(download_data: bool = True, force_download: bool = False) -> None:
     start_time = datetime.now()
 
     print("Munich Airbnb automated data pipeline")
@@ -52,18 +55,21 @@ def run_pipeline(download_data=True, force_download=False):
         print("\nSkipping budget-location analysis because the runner file was not found.")
 
     print("\n" + "=" * 60)
+    print("Running step: SQLite cleaned dataset storage")
+    print("=" * 60)
+
+    save_csv_outputs_to_sqlite(
+        results_dir=RESULTS_DIR,
+        database_path=DATABASE_PATH,
+    )
+
+    print(f"SQLite database updated: {DATABASE_PATH}")
+
+    print("\n" + "=" * 60)
     print("Running step: README generation")
     print("=" * 60)
 
     generate_readme()
-
-    print("\n" + "=" * 60)
-    print("Running step: SQLite export")
-    print("=" * 60)
-
-    save_csv_outputs_to_sqlite( results_dir=RESULTS_DIR,database_path=DATABASE_PATH,)
-
-    print(f"SQLite database updated: {DATABASE_PATH}")
 
     end_time = datetime.now()
     duration = end_time - start_time

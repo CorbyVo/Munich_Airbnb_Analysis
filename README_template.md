@@ -1,8 +1,10 @@
 # Munich Airbnb Market Analysis
 
-This project analyzes Airbnb listings in Munich using Python, pandas, matplotlib, seaborn, Tableau, and an automated data pipeline.
+This project analyzes Airbnb listings in Munich using Python, pandas, matplotlib, seaborn, SQLite, Tableau Public, and an automated local data pipeline.
 
 The goal is to understand nightly Airbnb prices, room-type differences, neighbourhood patterns, availability, and budget-friendly accommodation options for visitors. The project was extended with a budget-vs-distance analysis for visitors who may want to stay near Oktoberfest while also considering cheaper areas outside the city center.
+
+The project also includes cleaned historical data storage in SQLite and local workflow automation with n8n.
 
 > This README is generated automatically from `README_template.md` and the latest files in `results/`.
 
@@ -30,6 +32,7 @@ This project answers the following questions:
 - How does listing availability relate to price?
 - How does nightly price change by distance from the Oktoberfest area?
 - Which neighbourhoods may offer a better balance between nightly price and distance?
+- How can cleaned Airbnb listing snapshots be stored for future trend analysis or price prediction?
 
 ## Dataset
 
@@ -47,6 +50,8 @@ data/raw/
 ```
 
 Raw data files are not committed to GitHub because they are external dataset files. Instead, the repository documents the data source and keeps reproducible analysis code.
+
+The raw files can be overwritten when the pipeline downloads a newer dataset snapshot.
 
 ## Price Interpretation
 
@@ -115,18 +120,68 @@ The budget-location analysis adds a visitor-focused perspective by comparing nig
 
 ## Project Workflow
 
-The project follows a typical data analyst workflow:
+The project follows a reproducible data analyst workflow:
 
-1. Download the latest Munich Airbnb data.
-2. Load Airbnb listing data.
-3. Clean price, availability, room type, and neighbourhood fields.
-4. Remove missing or unrealistic values.
-5. Create summary tables by room type and neighbourhood.
-6. Generate visualizations for price and availability patterns.
-7. Export Tableau-ready CSV files.
-8. Build an interactive Tableau dashboard.
-9. Extend the project with budget-vs-distance analysis for Oktoberfest visitors.
-10. Regenerate the README automatically from latest pipeline outputs.
+1. Download or refresh the latest Munich Airbnb source data.
+2. Store raw downloaded files locally in `data/raw/`.
+3. Load Airbnb listing data.
+4. Clean price, availability, room type, neighbourhood, review, and location fields.
+5. Remove missing or unrealistic values.
+6. Add analysis-ready features such as distance to Oktoberfest.
+7. Store the cleaned row-level listing dataset in SQLite.
+8. Keep historical cleaned snapshots using `snapshot_date` and `ingested_at`.
+9. Create summary tables by room type, neighbourhood, and distance band.
+10. Generate visualizations for price, availability, and budget-location patterns.
+11. Export Tableau-ready CSV files.
+12. Regenerate the README automatically from latest pipeline outputs.
+13. Optionally trigger the pipeline using n8n.
+
+## SQLite Cleaned Data Storage
+
+This project stores the cleaned, analysis-ready Airbnb listing dataset in a local SQLite database.
+
+The raw downloaded files in `data/raw/` are treated as external source files and can be overwritten when the pipeline refreshes the data.
+
+The SQLite database is generated at:
+
+```text
+data/processed/munich_airbnb.sqlite
+```
+
+The main database tables are:
+
+```text
+cleaned_listings_latest
+cleaned_listings_history
+pipeline_runs
+```
+
+### Table Meanings
+
+`cleaned_listings_latest` contains the most recent cleaned listing dataset.
+
+`cleaned_listings_history` keeps historical cleaned listing snapshots. Each row includes metadata columns such as:
+
+- `snapshot_date`
+- `ingested_at`
+- `source_name`
+
+This makes it possible to compare cleaned Airbnb listing data across different dataset refreshes.
+
+`pipeline_runs` stores metadata about pipeline executions, such as the snapshot date, ingestion time, source file name, and row count.
+
+### Why This Matters
+
+The SQLite database creates a reusable analytical storage layer.
+
+It can support future analysis such as:
+
+- comparing median prices across different dataset snapshots
+- tracking neighbourhood price changes over time
+- preparing a future price prediction dataset
+- building features based on month, year, location, room type, availability, and review activity
+
+Important: this does not currently support true dynamic Oktoberfest 2026 price forecasting, because the downloaded `calendar.csv.gz` file does not contain usable `price` or `adjusted_price` values.
 
 ## Automated Pipeline
 
@@ -148,10 +203,53 @@ The pipeline updates:
 
 ```text
 data/raw/
+data/processed/munich_airbnb.sqlite
 results/
 images/
 README.md
 ```
+
+## Automation with n8n
+
+This project includes a local n8n workflow for automating the Munich Airbnb data pipeline.
+
+The n8n workflow uses:
+
+- Manual Trigger for testing
+- Schedule Trigger for weekly automation
+- Execute Command to run the local pipeline wrapper
+
+The command executed by n8n is:
+
+```powershell
+cmd /c call "D:\PycharmProjects\Munich_Airbnb_Analysis\scripts\run_pipeline_n8n.bat" --force-download
+```
+
+The workflow runs the full Python pipeline, which:
+
+- downloads or refreshes the latest available Inside Airbnb data
+- overwrites local raw source files
+- cleans and transforms the listing dataset
+- stores cleaned listing snapshots in SQLite
+- runs the main exploratory data analysis
+- runs the budget-vs-distance analysis
+- updates result CSV files
+- updates chart images
+- regenerates this README from `README_template.md`
+
+The exported n8n workflow is stored in:
+
+```text
+workflows/munich_airbnb_n8n_workflow.json
+```
+
+Detailed setup notes are available in:
+
+```text
+docs/n8n_automation.md
+```
+
+Important: this is a local automation setup. The scheduled workflow only runs when the laptop is turned on, n8n is running, and the workflow is active.
 
 ## Budget vs Distance Analysis
 
@@ -174,6 +272,8 @@ budget_distance_score = median_price_eur_per_night + median_distance_km * 10
 A lower score means the neighbourhood has a better balance between lower nightly price and reasonable distance from Oktoberfest.
 
 ## Generated Result Files
+
+The files in `results/` are analysis outputs generated from the cleaned data. They are not the main cleaned database. The main cleaned dataset is stored in SQLite.
 
 Main result files:
 
@@ -210,7 +310,10 @@ results/budget_location_output_dictionary.csv
 - NumPy
 - matplotlib
 - seaborn
+- SQLite
 - Tableau Public
+- n8n
+- Node.js / npm
 - Git and GitHub
 - Automated local data pipeline
 
@@ -221,9 +324,14 @@ Munich_Airbnb_Analysis/
 │
 ├── data/
 │   ├── README.md
-│   └── raw/
-│       ├── listings.csv
-│       └── calendar.csv.gz
+│   ├── raw/
+│   │   ├── listings.csv
+│   │   └── calendar.csv.gz
+│   └── processed/
+│       └── munich_airbnb.sqlite
+│
+├── docs/
+│   └── n8n_automation.md
 │
 ├── images/
 │   ├── top_neighbourhoods_by_price.png
@@ -246,7 +354,10 @@ Munich_Airbnb_Analysis/
 ├── scripts/
 │   ├── run_analysis.py
 │   ├── run_budget_location_analysis.py
-│   └── run_pipeline.py
+│   ├── run_pipeline.py
+│   ├── export_to_sqlite.py
+│   ├── run_pipeline_n8n.bat
+│   └── start_n8n.bat
 │
 ├── src/
 │   └── munich_airbnb/
@@ -258,17 +369,23 @@ Munich_Airbnb_Analysis/
 │       ├── visualize.py
 │       ├── report.py
 │       ├── budget_location_analysis.py
+│       ├── database.py
 │       ├── download_data.py
 │       ├── pipeline.py
 │       └── readme_generator.py
 │
+├── workflows/
+│   └── munich_airbnb_n8n_workflow.json
+│
 ├── README.md
 ├── README_template.md
 ├── requirements.txt
+├── package.json
+├── package-lock.json
 └── .gitignore
 ```
 
-Note: the local `.venv/` folder, Tableau local support folders, and raw data files should not be committed to GitHub.
+Note: the local `.venv/` folder, Tableau local support folders, `node_modules/`, local n8n runtime files, SQLite database files, and raw data files should not be committed to GitHub.
 
 ## How to Run the Project
 
@@ -276,6 +393,12 @@ Install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
+```
+
+Install local Node.js / n8n dependencies:
+
+```bash
+npm install
 ```
 
 Run the main Airbnb listing analysis:
@@ -290,10 +413,28 @@ Run the budget-vs-distance analysis:
 py scripts/run_budget_location_analysis.py
 ```
 
-Run the full automated pipeline:
+Run the full automated pipeline with existing local raw data:
+
+```bash
+py scripts/run_pipeline.py --skip-download
+```
+
+Run the full automated pipeline and refresh the raw data:
 
 ```bash
 py scripts/run_pipeline.py --force-download
+```
+
+Start local n8n:
+
+```bash
+scripts/start_n8n.bat
+```
+
+Then open:
+
+```text
+http://localhost:5678
 ```
 
 The scripts generate updated CSV files in:
@@ -302,10 +443,16 @@ The scripts generate updated CSV files in:
 results/
 ```
 
-and updated charts in:
+updated charts in:
 
 ```text
 images/
+```
+
+and the cleaned SQLite database in:
+
+```text
+data/processed/
 ```
 
 ## Limitations
@@ -316,18 +463,18 @@ Important limitations:
 
 - Prices are listing-level advertised nightly prices from `listings.csv`.
 - Calendar price and adjusted price values are unavailable in the downloaded `calendar.csv.gz`.
-- Final booking costs such as service fees, cleaning fees, taxes, and discounts are not included.
-- Distance to Oktoberfest is calculated using straight-line geographic distance, not actual public transport time.
-- The budget-distance score is a simple custom analytical score and should not be interpreted as an official recommendation system.
+- SQLite historical analysis becomes more useful only after multiple dataset snapshots have been collected over time.
 - The Tableau Public dashboard may need to be refreshed or republished separately depending on the dashboard data connection.
+- Local n8n automation only runs when the laptop is turned on, n8n is running, and the workflow is active.
 
 ## Future Improvements
 
 Possible next steps:
 
-- Connect the pipeline outputs to Power BI or Google Sheets for dashboard refresh.
-- Use n8n as an orchestration layer for scheduled pipeline execution.
+- Collect multiple cleaned SQLite snapshots over time for trend analysis.
+- Build a simple price prediction model using the cleaned historical SQLite dataset.
 - Add public transport travel time from each neighbourhood to Theresienwiese.
-- Improve the dashboard with more filters and custom tooltips.
+- Improve the Tableau dashboard with more filters and custom tooltips.
 - Add review data to analyze demand trends over time.
+- Deploy n8n on an always-on server or cloud instance for true scheduled automation.
 - Build a Streamlit version for interactive budget-based neighbourhood search.
