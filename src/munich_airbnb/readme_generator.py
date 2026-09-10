@@ -11,10 +11,7 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 README_TEMPLATE_PATH = PROJECT_ROOT / "README_template.md"
 README_OUTPUT_PATH = PROJECT_ROOT / "README.md"
 
-TABLEAU_DASHBOARD_URL = (
-    "https://public.tableau.com/app/profile/van.thoi.vo/viz/"
-    "MunichAirbnbMarketAnalysisDashboard/Dashboard3"
-)
+TABLEAU_DASHBOARD_URL = ("https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/MarketOverview")
 
 MIN_LISTINGS_PER_NEIGHBOURHOOD = 20
 

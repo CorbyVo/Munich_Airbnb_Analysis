@@ -9,7 +9,9 @@ data/raw/*.csv.gz
 *.twb
 *.twbx
 *.twb Files/
-
+*.hyper
+*tde
+Tableau_workbooks/
 # Local database outputs
 data/processed/*.sqlite
 data/processed/*.db

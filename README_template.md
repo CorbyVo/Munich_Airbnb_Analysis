@@ -22,6 +22,11 @@ Interactive dashboard available on Tableau Public:
 
 [View the Tableau Dashboard]({{ tableau_dashboard_url }})
 
+The Tableau dashboard contains two main views:
+- **Market Overview**: shows cleaned listing KPIs, neighbourhood price ranking, room type price differences, and the relationship between price and availability.
+- **Oktoberfest Budget Location Analysis**: compares neighbourhoods by median nightly price, distance to Oktoberfest, and a custom price-distance score.
+Google Sheets is used as a refreshable bridge between the Python pipeline and Tableau Public. SQLite remains the local cleaned historical data store for cleaned listing snapshots.
+
 ## Business Questions
 
 This project answers the following questions:

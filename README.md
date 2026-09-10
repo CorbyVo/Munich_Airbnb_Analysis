@@ -11,7 +11,7 @@ The project also includes cleaned historical data storage in SQLite and local wo
 ## Latest Data Refresh
 
 - Latest dataset snapshot: `2026-06-29`
-- README generated at: `2026-08-31T00:04:55`
+- README generated at: `2026-09-09T22:28:55`
 - Total cleaned listings: `4,387`
 - Median nightly listing price: `€143`
 - Price unit: `EUR per night`
@@ -141,12 +141,12 @@ The project follows a reproducible data analyst workflow:
 1. Download or refresh the latest Munich Airbnb source data.
 2. Store raw downloaded files locally in `data/raw/`.
 3. Load Airbnb listing data.
-4. Clean price, availability, room type, neighborhood, review, and location fields.
+4. Clean price, availability, room type, neighbourhood, review, and location fields.
 5. Remove missing or unrealistic values.
 6. Add analysis-ready features such as distance to Oktoberfest.
 7. Store the cleaned row-level listing dataset in SQLite.
 8. Keep historical cleaned snapshots using `snapshot_date` and `ingested_at`.
-9. Create summary tables by room type, neighborhood, and distance band.
+9. Create summary tables by room type, neighbourhood, and distance band.
 10. Generate visualizations for price, availability, and budget-location patterns.
 11. Export Tableau-ready CSV files.
 12. Regenerate the README automatically from latest pipeline outputs.
@@ -480,7 +480,7 @@ Important limitations:
 - Prices are listing-level advertised nightly prices from `listings.csv`.
 - Calendar price and adjusted price values are unavailable in the downloaded `calendar.csv.gz`.
 - SQLite historical analysis becomes more useful only after multiple dataset snapshots have been collected over time.
-- The Tableau Public dashboard currently requires republishing unless connected to a refreshable source such as Google Sheets.
+- The Tableau Public dashboard may need to be refreshed or republished separately depending on the dashboard data connection.
 - Local n8n automation only runs when the laptop is turned on, n8n is running, and the workflow is active.
 
 ## Future Improvements
@@ -490,7 +490,7 @@ Possible next steps:
 - Collect multiple cleaned SQLite snapshots over time for trend analysis.
 - Build a simple price prediction model using the cleaned historical SQLite dataset.
 - Add public transport travel time from each neighbourhood to Theresienwiese.
-- Improve the Tableau dashboard with more filters and custom tooltips, and connect to a refreshable source such as Google Sheets
+- Improve the Tableau dashboard with more filters and custom tooltips.
 - Add review data to analyze demand trends over time.
 - Deploy n8n on an always-on server or cloud instance for true scheduled automation.
 - Build a Streamlit version for interactive budget-based neighbourhood search.
