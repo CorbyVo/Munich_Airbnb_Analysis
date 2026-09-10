@@ -11,7 +11,7 @@ The project also includes cleaned historical data storage in SQLite and local wo
 ## Latest Data Refresh
 
 - Latest dataset snapshot: `2026-06-29`
-- README generated at: `2026-09-09T22:28:55`
+- README generated at: `2026-09-11T01:25:53`
 - Total cleaned listings: `4,387`
 - Median nightly listing price: `€143`
 - Price unit: `EUR per night`
@@ -20,7 +20,12 @@ The project also includes cleaned historical data storage in SQLite and local wo
 
 Interactive dashboard available on Tableau Public:
 
-[View the Tableau Dashboard](https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/Dashboard3)
+[View the Tableau Dashboard](https://public.tableau.com/app/profile/van.thoi.vo/viz/MunichAirbnbMarketAnalysisDashboard/MarketOverview)
+
+The Tableau dashboard contains two main views:
+- **Market Overview**: shows cleaned listing KPIs, neighbourhood price ranking, room type price differences, and the relationship between price and availability.
+- **Oktoberfest Budget Location Analysis**: compares neighbourhoods by median nightly price, distance to Oktoberfest, and a custom price-distance score.
+Google Sheets is used as a refreshable bridge between the Python pipeline and Tableau Public. SQLite remains the local cleaned historical data store for cleaned listing snapshots.
 
 ## Business Questions
 
