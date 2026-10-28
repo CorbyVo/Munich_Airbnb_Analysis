@@ -10,10 +10,10 @@ The project also includes cleaned historical data storage in SQLite and local wo
 
 ## Latest Data Refresh
 
-- Latest dataset snapshot: `2026-06-29`
-- README generated at: `2026-09-11T01:25:53`
-- Total cleaned listings: `4,387`
-- Median nightly listing price: `€143`
+- Latest dataset snapshot: `2026-09-23`
+- README generated at: `2026-10-28T14:47:16`
+- Total cleaned listings: `4,972`
+- Median nightly listing price: `€200`
 - Price unit: `EUR per night`
 
 ## Tableau Dashboard
@@ -78,17 +78,17 @@ Important interpretation notes:
 
 From the latest cleaned listing dataset:
 
-- The cleaned dataset contains `4,387` Munich Airbnb listings.
-- The median nightly listing price is `€143`.
+- The cleaned dataset contains `4,972` Munich Airbnb listings.
+- The median nightly listing price is `€200`.
 - The most common room type is `Entire home/apt`.
 - The room type with the highest median nightly price is `Entire home/apt`.
 - The neighbourhood with the highest median nightly price is `Altstadt-Lehel`.
 
 The budget-location analysis adds a visitor-focused perspective by comparing nightly price with distance to the Oktoberfest area.
 
-- Best budget-distance neighbourhood: `Sendling-Westpark`
-- Best budget-distance price: `€119` per night
-- Best budget-distance median distance: `2.8 km`
+- Best budget-distance neighbourhood: `Untergiesing-Harlaching`
+- Best budget-distance price: `€169` per night
+- Best budget-distance median distance: `3.2 km`
 - Cheapest neighbourhood with enough listings: `Aubing-Lochhausen-Langwied`
 - Cheapest neighbourhood median price: `€110` per night
 - Cheapest neighbourhood median distance: `10.4 km`
@@ -97,25 +97,25 @@ The budget-location analysis adds a visitor-focused perspective by comparing nig
 
 | Distance band | Listings | Median nightly price (€) | Median distance (km) |
 | --- | --- | --- | --- |
-| 0-2 km from Oktoberfest | 955 | 188 | 1.1 |
-| 2-5 km from Oktoberfest | 1,814 | 154 | 3.2 |
-| 5-10 km from Oktoberfest | 1,371 | 118 | 6.7 |
-| 10+ km from Oktoberfest | 247 | 114 | 10.5 |
+| 0-2 km from Oktoberfest | 1,081 | 278 | 1.1 |
+| 2-5 km from Oktoberfest | 2,105 | 205 | 3.2 |
+| 5-10 km from Oktoberfest | 1,519 | 167 | 6.7 |
+| 10+ km from Oktoberfest | 267 | 140 | 10.5 |
 
 ## Budget-Friendly Neighbourhood Recommendations
 
 | Neighbourhood | Listings | Median nightly price (€) | Median distance (km) | Budget-distance score |
 | --- | --- | --- | --- | --- |
-| Sendling-Westpark | 158 | 119 | 2.8 | 146.5 |
-| Laim | 134 | 122 | 3.1 | 152.8 |
-| Obergiesing | 146 | 124 | 3.5 | 159.1 |
-| Hadern | 43 | 115 | 4.9 | 164.4 |
-| Neuhausen-Nymphenburg | 241 | 138 | 2.9 | 167.4 |
-| Untergiesing-Harlaching | 131 | 136 | 3.2 | 168.3 |
-| Sendling | 134 | 159 | 1.7 | 175.7 |
-| Ramersdorf-Perlach | 202 | 113 | 6.3 | 176.0 |
-| Milbertshofen-Am Hart | 141 | 116 | 6.1 | 176.7 |
-| Pasing-Obermenzing | 145 | 111 | 6.7 | 178.3 |
+| Untergiesing-Harlaching | 143 | 169 | 3.2 | 201.2 |
+| Sendling-Westpark | 177 | 180 | 2.7 | 206.8 |
+| Obergiesing | 167 | 175 | 3.5 | 209.9 |
+| Hadern | 49 | 162 | 5.0 | 211.9 |
+| Laim | 145 | 183 | 3.1 | 214.1 |
+| Aubing-Lochhausen-Langwied | 152 | 110 | 10.4 | 214.4 |
+| Milbertshofen-Am Hart | 160 | 155 | 6.0 | 215.5 |
+| Neuhausen-Nymphenburg | 290 | 190 | 2.9 | 219.0 |
+| Thalkirchen-Obersendling-Forstenried-Fürstenried-Solln | 256 | 174 | 5.1 | 224.9 |
+| Ramersdorf-Perlach | 208 | 164 | 6.4 | 227.8 |
 
 ## Visualizations
 
