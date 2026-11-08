@@ -11,7 +11,7 @@ The project also includes cleaned historical data storage in SQLite and local wo
 ## Latest Data Refresh
 
 - Latest dataset snapshot: `2026-09-23`
-- README generated at: `2026-11-01T02:15:17`
+- README generated at: `2026-11-08T02:30:35`
 - Total cleaned listings: `4,972`
 - Median nightly listing price: `€200`
 - Price unit: `EUR per night`
